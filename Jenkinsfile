@@ -9,7 +9,7 @@ pipeline {
       DOCKER_PASS = 'docker' // Secret name to use to sign into Docker registry
       IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
       IMAGE_TAG = "${RELEASE_NUMBER}"
-  
+
   }
 
   stages {
@@ -30,7 +30,7 @@ pipeline {
       steps {
         echo 'Docker build app'
         script {
-          docker.withRegistry('', DOCKER_PASS) {
+          docker.withRegistry('localhost', DOCKER_PASS) {
             docker_image = docker.build "${IMAGE_NAME}"
             docker_image.push("${IMAGE_TAG}")
             docker_image.push("latest")
