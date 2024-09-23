@@ -4,11 +4,9 @@ pipeline {
 
   environment {
       APP_NAME = "tomee-jenkins"
-      RELEASE_NUMBER = "1.0"
       DOCKER_USER = "registry"
       DOCKER_PASS = 'docker' // Secret name to use to sign into Docker registry
       IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
-      IMAGE_TAG = "${RELEASE_NUMBER}"
 
   }
 
@@ -32,7 +30,6 @@ pipeline {
         script {
           docker.withRegistry('https://localhost:5000', DOCKER_PASS) {
             docker_image = docker.build "${IMAGE_NAME}"
-            docker_image.push("${IMAGE_TAG}")
             docker_image.push("latest")
           }
         }
@@ -42,7 +39,6 @@ pipeline {
     stage('Cleanup Artifacts') {
       steps {
         script {
-          sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
           sh "docker rmi ${IMAGE_NAME}:latest"
         }
       }
