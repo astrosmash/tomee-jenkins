@@ -1,4 +1,5 @@
-FROM openjdk:11-ea-17-jre-slim
+FROM openjdk:17-jdk-slim
+
 
 ENV PATH /usr/local/simple-java-maven-app-jenkins-docs/bin:$PATH
 RUN mkdir -p /usr/local/simple-java-maven-app-jenkins-docs
