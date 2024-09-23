@@ -5,7 +5,7 @@ RUN mkdir -p /usr/local/tomee
 
 WORKDIR /usr/local/tomee
 
-COPY /var/lib/jenkins/workspace/tomee-jenkins/server/openejb-daemon/target/openejb-daemon-*.jar /usr/local/tomee/
+COPY . .
 
-CMD ["java", "-jar", "openejb-daemon-10.0.0-M3-SNAPSHOT.jar"]
+CMD ["java", "-jar", "server/openejb-daemon/target/openejb-daemon-10.0.0-M3-SNAPSHOT.jar"]
 
