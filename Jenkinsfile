@@ -13,13 +13,19 @@ pipeline {
   stages {
     stage("Build") {
       steps {
-        sh 'mvn package'
+        sh 'mvn -B -DskipTests clean package'
+      }
+    }
+
+    stage("Test") {
+      steps {
+        sh 'mvn test'
       }
     }
 
     stage("Confirm Build Artifact") {
       steps {
-        sh "ls -lah /var/lib/jenkins/workspace/tomee-jenkins/target/my-app-1.0-SNAPSHOT.jar"
+        sh "ls -lah /var/lib/jenkins/workspace/simple-java-maven-app-jenkins-docs/target/my-app-1.0-SNAPSHOT.jar"
         echo "Build Step Executed!"
       }
     }
