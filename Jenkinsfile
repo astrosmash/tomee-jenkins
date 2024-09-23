@@ -2,6 +2,16 @@
 pipeline {
   agent any
 
+  environment {
+      APP_NAME = "tomee-jenkins"
+      RELEASE_NUMBER = "1.0"
+      DOCKER_USER = "registry"
+      DOCKER_PASS = 'docker' // Secret name to use to sign into Docker registry
+      IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+      IMAGE_TAG = "${RELEASE_NUMBER}"
+  
+  }
+
   stages {
     stage("Build") {
       steps {
