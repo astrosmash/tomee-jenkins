@@ -1,4 +1,4 @@
-FROM openjdk:7-jre
+FROM openjdk:8u342-jre
 
 ENV PATH /usr/local/simple-java-maven-app-jenkins-docs/bin:$PATH
 RUN mkdir -p /usr/local/simple-java-maven-app-jenkins-docs
