@@ -30,7 +30,7 @@ pipeline {
       steps {
         echo 'Docker build app'
         script {
-          docker.withRegistry('http://localhost:5000', DOCKER_PASS) {
+          docker.withRegistry('https://localhost:5000', DOCKER_PASS) {
             docker_image = docker.build "${IMAGE_NAME}"
             docker_image.push("${IMAGE_TAG}")
             docker_image.push("latest")
