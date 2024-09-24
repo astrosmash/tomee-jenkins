@@ -4,6 +4,8 @@ on: push
 
 jobs:
   simple-java-maven-app-jenkins-docs-build:
+    runs-on: ubuntu-latest
+
     env:
       APP_NAME: 'simple-java-maven-app-jenkins-docs'
       DOCKER_USER: 'registry'
@@ -12,10 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-java@v4
+
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@v1.7.0
       with:
-        java-version: '17'
-        distribution: 'temurin'
+        checkout-fetch-depth: 0
+        java-version: 17
+        java-distribution: temurin
+        maven-version: 3.9.2
 
     - name: Build
       run: mvn -B -DskipTests clean package
@@ -29,7 +35,7 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        registry: https://<external_ip_of_your_node>:5000
+        registry: https://34.27.59.53:5000
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
