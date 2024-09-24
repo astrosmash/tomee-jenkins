@@ -1,3 +1,7 @@
+name: simple-java-maven-app-jenkins-workflow
+
+on: push
+
 jobs:
   simple-java-maven-app-jenkins-docs-build:
     env:
