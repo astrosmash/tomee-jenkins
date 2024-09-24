@@ -8,7 +8,7 @@ jobs:
       APP_NAME: 'simple-java-maven-app-jenkins-docs'
       DOCKER_USER: 'registry'
       DOCKER_PASS: 'docker' # Secret name to use to sign into Docker registry
-      IMAGE_NAME: '${{ env.DOCKER_USER }}/${{ env.APP_NAME }}'
+      IMAGE_NAME: 'registry/simple-java-maven-app-jenkins-docs'
 
     steps:
     - uses: actions/checkout@v4
