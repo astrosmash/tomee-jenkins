@@ -4,7 +4,8 @@ on: push
 
 jobs:
   simple-java-maven-app-jenkins-docs-build:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     env:
       APP_NAME: 'simple-java-maven-app-jenkins-docs'
