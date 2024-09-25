@@ -53,6 +53,8 @@ jobs:
       id: setup_docker_buildx
       uses: docker/setup-buildx-action@v3
       with:
+        endpoint: builders
+        buildkitd-flags: --debug
         config: buildkitd.toml
 
     - name: Login to Docker Hub
