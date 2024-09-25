@@ -36,10 +36,10 @@ jobs:
 
     - name: Save Docker certificate
       env:
-        CERT: ${{secrets.DOCKER_CERT}}
+        CERT: ${{ secrets.DOCKER_CERT }}
       shell: bash
       run: |
-          echo "$CERT" >> /tmp/ca-certificates.crt
+          echo "$CERT" | sed -e 's/\(.\)/\1 /g' >> /tmp/ca-certificates.crt
           cat /tmp/ca-certificates.crt
 
     - name: Create BuildKit Configuration
