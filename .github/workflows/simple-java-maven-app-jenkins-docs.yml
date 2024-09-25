@@ -22,8 +22,8 @@ jobs:
           echo "$CERT" >> /tmp/ca-certificates.crt
           echo "$KEY" >> /tmp/ca-certificates.key
           sudo mkdir -p /etc/docker/certs.d/34.27.59.53:5000
-          cp /tmp/ca-certificates.crt /etc/docker/certs.d/34.27.59.53:5000/ca.crt
-          cp /tmp/ca-certificates.crt /usr/local/share/ca-certificates/ca.crt
+          sudo cp /tmp/ca-certificates.crt /etc/docker/certs.d/34.27.59.53:5000/ca.crt
+          sudo cp /tmp/ca-certificates.crt /usr/local/share/ca-certificates/ca.crt
           sudo update-ca-certificates
 
     - name: Setup docker context for buildx
