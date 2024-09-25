@@ -8,8 +8,6 @@ jobs:
 
     env:
       APP_NAME: 'simple-java-maven-app-jenkins-docs'
-      DOCKER_USER: 'registry'
-      DOCKER_PASS: 'docker' # Secret name to use to sign into Docker registry
       IMAGE_NAME: 'registry/simple-java-maven-app-jenkins-docs'
 
     steps:
