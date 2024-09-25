@@ -45,9 +45,8 @@ jobs:
       run: |
         cat <<EOF > buildkitd.toml
         [registry."34.27.59.53:5000"]
-          http = false
-          insecure = false
-          ca=["/tmp/ca-certificates.crt"]
+          http = true
+          insecure = true
         EOF
 
     - name: Setup Docker Buildx
