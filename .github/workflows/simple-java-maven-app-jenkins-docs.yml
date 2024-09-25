@@ -8,7 +8,7 @@ jobs:
 
     env:
       APP_NAME: 'simple-java-maven-app-jenkins-docs'
-      IMAGE_NAME: 'registry/simple-java-maven-app-jenkins-docs'
+      IMAGE_NAME: '34.27.59.53:5000/simple-java-maven-app-jenkins-docs'
 
     steps:
     - uses: actions/checkout@v4
