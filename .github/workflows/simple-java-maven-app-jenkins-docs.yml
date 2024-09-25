@@ -34,10 +34,13 @@ jobs:
       id: buildx-context
       run: docker context create builders || docker context use builders
 
-    - run: 'echo "$DOCKER_CERT" > /tmp/ca-certificates.crt'
-      shell: bash
+    - name: Save Docker certificate
       env:
-        DOCKER_CERT: ${{ secrets.DOCKER_CERT }}
+        CERT: ${{secrets.DOCKER_CERT}}
+      shell: bash
+      run: |
+          echo "$CERT" >> /tmp/ca-certificates.crt
+          cat /tmp/ca-certificates.crt
 
     - name: Create BuildKit Configuration
       run: |
