@@ -54,7 +54,7 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        registry: https://34.27.59.53:5000
+        registry: http://34.27.59.53:5000
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
