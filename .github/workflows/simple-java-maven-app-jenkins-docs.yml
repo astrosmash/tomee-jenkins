@@ -30,6 +30,27 @@ jobs:
     - name: Confirm Build Artifact
       run: ls -lah target/my-app-1.0-SNAPSHOT.jar && echo 'Build Step Executed!'
 
+    - name: Setup docker context for buildx
+      id: buildx-context
+      run: docker context create builders || docker context use builders
+
+    - name: Create BuildKit Configuration
+      run: |
+        cat <<EOF > buildkitd.toml   
+        [registry."34.27.59.53:5000"]
+          http = true
+          insecure = true
+        EOF
+
+    - name: Setup Docker Buildx
+      id: setup_docker_buildx
+      uses: docker/setup-buildx-action@v1
+      with:
+        version: v0.7.0-rc1
+        endpoint: builders
+        buildkitd-flags: --debug
+        config: buildkitd.toml
+
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
@@ -42,4 +63,3 @@ jobs:
       with:
         push: true
         tags: '${{ env.IMAGE_NAME }}:latest'
-
