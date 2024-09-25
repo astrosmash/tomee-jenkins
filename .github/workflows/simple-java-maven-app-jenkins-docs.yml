@@ -14,15 +14,15 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
       with:
         config-inline: |
-          [registry."34.27.59.53:5000"]
+          [registry."http://34.27.59.53:5000"]
             http = true
             insecure = true
 
     - name: Login to Production Registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         registry: http://34.27.59.53:5000
         username: ${{ secrets.DOCKER_USER }}
