@@ -35,7 +35,7 @@ jobs:
       run: docker context create builders || docker context use builders
 
     - name: Copy ca cert
-      run: echo ${{ secrets.DOCKER_CERT }} | sudo tee /etc/ssl/certs/ca-certificates.crt
+      run: echo ${{ secrets.DOCKER_CERT }} > /tmp/ca-certificates.crt
 
     - name: Create BuildKit Configuration
       run: |
@@ -43,7 +43,7 @@ jobs:
         [registry."34.27.59.53:5000"]
           http = false
           insecure = false
-          ca=["/etc/ssl/certs/ca-certificates.crt"]
+          ca=["/tmp/ca-certificates.crt"]
         EOF
 
     - name: Setup Docker Buildx
