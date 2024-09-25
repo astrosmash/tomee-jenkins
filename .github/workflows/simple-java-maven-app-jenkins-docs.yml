@@ -13,23 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup Maven Action
-      uses: s4u/setup-maven-action@v1.7.0
-      with:
-        checkout-fetch-depth: 0
-        java-version: 17
-        java-distribution: temurin
-        maven-version: 3.9.2
-
-    - name: Build
-      run: mvn -B -DskipTests clean package
-
-    - name: Test
-      run: mvn test
-
-    - name: Confirm Build Artifact
-      run: ls -lah target/my-app-1.0-SNAPSHOT.jar && echo 'Build Step Executed!'
-
     - name: Setup docker context for buildx
       id: buildx-context
       run: docker context create builders || docker context use builders
@@ -43,7 +26,7 @@ jobs:
 
     - name: Create BuildKit Configuration
       run: |
-        cat <<EOF > buildkitd.toml
+        cat <<EOF > /tmp/buildkitd.toml
         [registry."34.27.59.53:5000"]
           http = true
           insecure = true
@@ -55,7 +38,7 @@ jobs:
       with:
         endpoint: builders
         buildkitd-flags: --debug
-        config: buildkitd.toml
+        config: /tmp/buildkitd.toml
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
