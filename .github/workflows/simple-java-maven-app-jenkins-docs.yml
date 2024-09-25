@@ -36,38 +36,7 @@ jobs:
 
     - name: Copy ca cert
       run: |
-        echo "
-          -----BEGIN CERTIFICATE-----
-          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
-          M7f4I/RxLITPEw8wNWUPFYP8
-          -----END CERTIFICATE-----
-      " | sudo tee /etc/ssl/certs/ca-certificates.crt
+        echo ${{ secrets.DOCKER_CERT }} | sudo tee /etc/ssl/certs/ca-certificates.crt
 
     - name: Create BuildKit Configuration
       run: |
