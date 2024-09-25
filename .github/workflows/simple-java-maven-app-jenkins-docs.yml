@@ -16,9 +16,11 @@ jobs:
     - name: Save Docker certificate
       env:
         CERT: ${{ secrets.DOCKER_CERT }}
+        CERT: ${{ secrets.DOCKER_KEY }}
       shell: bash
       run: |
           echo "$CERT" >> /tmp/ca-certificates.crt
+          echo "$KEY" >> /tmp/ca-certificates.key
 
     - name: Setup docker context for buildx
       id: buildx-context
@@ -32,7 +34,11 @@ jobs:
         endpoint: builders
         config-inline: |
           [registry."34.27.59.53:5000"]
+            mirrors = ["34.27.59.53:5000"]
             ca=["/tmp/ca-certificates.crt"]
+            [[registry."34.27.59.53:5000".keypair]]
+             key="/tmp/ca-certificates.key"
+             cert="/tmp/ca-certificates.crt"
 
     - name: Login to Production Registry
       uses: docker/login-action@v3
