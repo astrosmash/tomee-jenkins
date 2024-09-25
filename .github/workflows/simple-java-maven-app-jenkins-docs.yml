@@ -16,7 +16,7 @@ jobs:
     - name: Save Docker certificate
       env:
         CERT: ${{ secrets.DOCKER_CERT }}
-        CERT: ${{ secrets.DOCKER_KEY }}
+        KEY: ${{ secrets.DOCKER_KEY }}
       shell: bash
       run: |
           echo "$CERT" >> /tmp/ca-certificates.crt
