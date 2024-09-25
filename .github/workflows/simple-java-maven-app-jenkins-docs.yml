@@ -34,8 +34,10 @@ jobs:
       id: buildx-context
       run: docker context create builders || docker context use builders
 
-    - name: Copy ca cert
-      run: echo "${{ secrets.DOCKER_CERT }}" >> /tmp/ca-certificates.crt && cat /tmp/ca-certificates.crt
+    - run: 'echo "$SSH_KEY" > /tmp/ca-certificates.crt && cat /tmp/ca-certificates.crt'
+      shell: bash
+      env:
+        SSH_KEY: ${{ secrets.DOCKER_CERT }}
 
     - name: Create BuildKit Configuration
       run: |
