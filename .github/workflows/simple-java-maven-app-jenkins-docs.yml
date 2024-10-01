@@ -9,7 +9,7 @@ jobs:
 
     env:
       APP_NAME: 'simple-java-maven-app-jenkins-docs'
-      IMAGE_NAME: '34.27.59.53:5000/simple-java-maven-app-jenkins-docs'
+      IMAGE_NAME: '35.192.185.56:5000/simple-java-maven-app-jenkins-docs'
 
     steps:
     - uses: actions/checkout@v4
@@ -37,15 +37,15 @@ jobs:
       shell: bash
       run: |
           echo "$CERT" >> /tmp/ca-certificates.crt
-          sudo mkdir -p /etc/docker/certs.d/34.27.59.53:5000
-          sudo cp /tmp/ca-certificates.crt /etc/docker/certs.d/34.27.59.53:5000/ca.crt
+          sudo mkdir -p /etc/docker/certs.d/35.192.185.56:5000
+          sudo cp /tmp/ca-certificates.crt /etc/docker/certs.d/35.192.185.56:5000/ca.crt
           sudo cp /tmp/ca-certificates.crt /usr/local/share/ca-certificates/ca.crt
           sudo update-ca-certificates
 
     - name: Login to Production Registry
       uses: docker/login-action@v3
       with:
-        registry: 34.27.59.53:5000
+        registry: 35.192.185.56:5000
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
 
